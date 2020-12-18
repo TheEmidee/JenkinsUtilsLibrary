@@ -12,21 +12,21 @@ def call( script, String project_name_override = null ) {
     build_configuration = getBuildConfiguration( deployment_environment )
 
     if ( project_name_override != null ) {
-        environment.PROJECT_NAME = project_name_override
+        Environment.instance.PROJECT_NAME = project_name_override
     } else {
-        environment.PROJECT_NAME = getProjectName( script )
+        Environment.instance.PROJECT_NAME = getProjectName( script )
     }
 
-    log.info "ProjectName : ${environment.PROJECT_NAME}"
+    log.info "ProjectName : ${Environment.instance.PROJECT_NAME}"
 
-    environment.BRANCH_TYPE = branch_type
-    log.info "BranchType : ${environment.BRANCH_TYPE}"
+    Environment.instance.BRANCH_TYPE = branch_type
+    log.info "BranchType : ${Environment.instance.BRANCH_TYPE}"
 
-    environment.DEPLOYMENT_ENVIRONMENT = deployment_environment
-    log.info "DeploymentEnvironment ${environment.DEPLOYMENT_ENVIRONMENT}"
+    Environment.instance.DEPLOYMENT_ENVIRONMENT = deployment_environment
+    log.info "DeploymentEnvironment ${Environment.instance.DEPLOYMENT_ENVIRONMENT}"
 
-    environment.BUILD_CONFIGURATION = build_configuration
-    log.info "ClientConfiguration : ${environment.BUILD_CONFIGURATION}"
+    Environment.instance.BUILD_CONFIGURATION = build_configuration
+    log.info "ClientConfiguration : ${Environment.instance.BUILD_CONFIGURATION}"
 }
 
 private def getProjectName(def script) {
