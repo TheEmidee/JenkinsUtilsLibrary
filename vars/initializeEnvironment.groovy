@@ -9,7 +9,7 @@ def call( script, String project_name_override = null ) {
 
     branch_type = getBranchType( script.env.BRANCH_NAME )
     deployment_environment = getBranchDeploymentEnvironment( branch_type )
-    client_config = getClientConfig( deployment_environment )
+    build_configuration = getBuildConfiguration( deployment_environment )
 
     if ( project_name_override != null ) {
         environment.PROJECT_NAME = project_name_override
@@ -25,8 +25,8 @@ def call( script, String project_name_override = null ) {
     environment.DEPLOYMENT_ENVIRONMENT = deployment_environment
     log.info "DeploymentEnvironment ${environment.DEPLOYMENT_ENVIRONMENT}"
 
-    environment.CLIENT_CONFIG = client_config
-    log.info "ClientConfiguration : ${environment.CLIENT_CONFIG}"
+    environment.BUILD_CONFIGURATION = build_configuration
+    log.info "ClientConfiguration : ${environment.BUILD_CONFIGURATION}"
 }
 
 private def getProjectName(def script) {
@@ -60,7 +60,7 @@ private def getBranchDeploymentEnvironment( BranchType branch_type ) {
     }
 }
 
-def getClientConfig( DeploymentEnvironment deployment_environment ) {
+def getBuildConfiguration( DeploymentEnvironment deployment_environment ) {
     switch ( deployment_environment ) {
         case DeploymentEnvironment.Shipping:
             return BuildConfiguration.Shipping
