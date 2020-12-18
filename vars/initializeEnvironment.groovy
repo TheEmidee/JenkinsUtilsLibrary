@@ -1,6 +1,6 @@
 #!/usr/bin/groovy
 
-def call( String project_name_override = null, body ) {
+def call( script, String project_name_override = null ) {
     log.info "InitializeEnvironment"
 
     branch_type = getBranchType( script.env.BRANCH_NAME )
@@ -23,16 +23,4 @@ def call( String project_name_override = null, body ) {
 
     script.env.CLIENT_CONFIG = client_config
     log.info "ClientConfiguration : ${script.env.CLIENT_CONFIG}"
-}
-
-def call( Map parameters = [:], body ) {
-
-    def defaultLabel = buildId('release')
-    def label = parameters.get('label', defaultLabel)
-
-    releaseTemplate(parameters) {
-        node(label) {
-            body()
-        }
-    }
 }
