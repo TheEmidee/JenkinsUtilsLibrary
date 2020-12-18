@@ -5,6 +5,8 @@ def call() {
   def hi = Jenkins.instance
   def pname = env.JOB_NAME.split('/')[0]
 
+  log.info "Check if must abort previous running build"
+
   hi.getItem( pname ).getItem(env.JOB_BASE_NAME).getBuilds().each{ build ->
     def exec = build.getExecutor()
 
@@ -15,7 +17,10 @@ def call() {
           "Aborted by #${currentBuild.number}"
         )
       )
-      println("Aborted previous running build #${build.number}")
+      log.warning "Aborted previous running build #${build.number}"
+      return
     }
   }
+
+  log.info "No need to abort the previous build"
 }
