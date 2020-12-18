@@ -5,7 +5,7 @@ import org.emidee.jenkins.BuildConfiguration
 import org.emidee.jenkins.DeploymentEnvironment
 import org.emidee.jenkins.Environment
 
-def call( script, String project_name_override = null ) {
+def call( Script script, String project_name_override = null ) {
     log.info "InitializeEnvironment"
 
     branch_type = getBranchType( script.env.BRANCH_NAME )
