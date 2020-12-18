@@ -26,3 +26,43 @@ def call( script, String project_name_override = null ) {
     script.env.CLIENT_CONFIG = client_config
     log.info "ClientConfiguration : ${script.env.CLIENT_CONFIG}"
 }
+
+private def getProjectName(def script) {
+    split_result = "${script.env.JOB_NAME}".split('/')
+    project_name = split_result.length > 1 ? split_result[split_result.length - 2] : split_result.max()
+    return project_name
+}
+
+private def getBranchType( String branch_name ) {
+    if ( branch_name =~ ".*develop" ) {
+        return BranchType.Development
+    } else if ( branch_name =~ ".*release/.*" ) {
+        return BranchType.Release
+    } else if ( branch_name =~ ".*master" ) {
+        return BranchType.Master
+    }
+
+    return BranchType.PullRequest
+}
+
+private def getBranchDeploymentEnvironment( BranchType branch_type ) {
+    switch ( branch_type ) {
+        case BranchType.Development:
+            return DeploymentEnvironment.Development
+        case BranchType.Release:
+            return DeploymentEnvironment.Release
+        case BranchType.Master:
+            return DeploymentEnvironment.Shipping
+        default:
+            return DeploymentEnvironment.PullRequest
+    }
+}
+
+private def getClientConfig( DeploymentEnvironment deployment_environment ) {
+    switch ( deployment_environment ) {
+        case DeploymentEnvironment.Shipping:
+            return BuildConfiguration.Shipping
+        default:
+            return BuildConfiguration.Development
+    }
+}
