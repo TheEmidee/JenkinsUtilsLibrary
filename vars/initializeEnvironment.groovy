@@ -3,8 +3,7 @@
 import org.emidee.jenkins.BranchType
 import org.emidee.jenkins.BuildConfiguration
 import org.emidee.jenkins.DeploymentEnvironment
-
-def types = load 'types.groovy'
+import org.emidee.jenkins.Environment
 
 def call( script, String project_name_override = null ) {
     log.info "InitializeEnvironment"
@@ -14,21 +13,21 @@ def call( script, String project_name_override = null ) {
     client_config = getClientConfig( deployment_environment )
 
     if ( project_name_override != null ) {
-        script.env.PROJECT_NAME = project_name_override
+        Environment.PROJECT_NAME = project_name_override
     } else {
-        script.env.PROJECT_NAME = getProjectName( script )
+        Environment.PROJECT_NAME = getProjectName( script )
     }
 
-    log.info "ProjectName : ${script.env.PROJECT_NAME}"
+    log.info "ProjectName : ${Environment.PROJECT_NAME}"
 
-    script.env.BRANCH_TYPE = branch_type
-    log.info "BranchType : ${script.env.BRANCH_TYPE}"
+    Environment.BRANCH_TYPE = branch_type
+    log.info "BranchType : ${Environment.BRANCH_TYPE}"
 
-    script.env.DEPLOYMENT_ENVIRONMENT = deployment_environment
-    log.info "DeploymentEnvironment ${script.env.DEPLOYMENT_ENVIRONMENT}"
+    Environment.DEPLOYMENT_ENVIRONMENT = deployment_environment
+    log.info "DeploymentEnvironment ${Environment.DEPLOYMENT_ENVIRONMENT}"
 
-    script.env.CLIENT_CONFIG = client_config
-    log.info "ClientConfiguration : ${script.env.CLIENT_CONFIG}"
+    Environment.CLIENT_CONFIG = client_config
+    log.info "ClientConfiguration : ${Environment.CLIENT_CONFIG}"
 }
 
 private def getProjectName(def script) {
