@@ -1,6 +1,6 @@
 #!/usr/bin/groovy
 
-package unreal;
+package jenkinsutils;
 
 enum BranchType {
     Development,
