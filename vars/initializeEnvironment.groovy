@@ -1,6 +1,10 @@
 #!/usr/bin/groovy
 
-package jenkinsutils;
+import com.emidee.jenkins.BranchType
+import com.emidee.jenkins.BuildConfiguration
+import com.emidee.jenkins.DeploymentEnvironment
+
+def types = load 'types.groovy'
 
 def call( script, String project_name_override = null ) {
     log.info "InitializeEnvironment"
@@ -58,7 +62,7 @@ private def getBranchDeploymentEnvironment( BranchType branch_type ) {
     }
 }
 
-private def getClientConfig( DeploymentEnvironment deployment_environment ) {
+def getClientConfig( DeploymentEnvironment deployment_environment ) {
     switch ( deployment_environment ) {
         case DeploymentEnvironment.Shipping:
             return BuildConfiguration.Shipping
