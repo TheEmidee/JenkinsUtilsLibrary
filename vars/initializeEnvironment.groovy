@@ -1,5 +1,7 @@
 #!/usr/bin/groovy
 
+package jenkinsutils;
+
 def call( script, String project_name_override = null ) {
     log.info "InitializeEnvironment"
 
