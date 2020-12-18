@@ -1,8 +1,8 @@
 #!/usr/bin/groovy
 
-import com.emidee.jenkins.BranchType
-import com.emidee.jenkins.BuildConfiguration
-import com.emidee.jenkins.DeploymentEnvironment
+import org.emidee.jenkins.BranchType
+import org.emidee.jenkins.BuildConfiguration
+import org.emidee.jenkins.DeploymentEnvironment
 
 def types = load 'types.groovy'
 
