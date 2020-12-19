@@ -8,9 +8,19 @@ import org.emidee.jenkins.Environment
 def call( Script script, String project_name_override = null ) {
     log.info "InitializeEnvironment"
 
-    branch_type = getBranchType( script.env.BRANCH_NAME )
-    deployment_environment = getBranchDeploymentEnvironment( branch_type )
-    build_configuration = getBuildConfiguration( deployment_environment )
+    // Maybe not possible to call getBranchName from vars ?
+    def branch_name = getBranchName()
+    //  script.env.BRANCH_NAME
+
+    // if ( branch_name == null ) {
+    //     branch_name = env.GIT_BRANCH
+    // }
+
+    Environment.instance.BRANCH_NAME = branch_name
+
+    def branch_type = getBranchType( branch_name )
+    def deployment_environment = getBranchDeploymentEnvironment( branch_type )
+    def build_configuration = getBuildConfiguration( deployment_environment )
 
     if ( project_name_override != null ) {
         Environment.instance.PROJECT_NAME = project_name_override
