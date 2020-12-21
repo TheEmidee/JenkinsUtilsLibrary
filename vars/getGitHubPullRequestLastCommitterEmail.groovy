@@ -13,5 +13,5 @@ def call( String github_token, String repository_owner, String repository_name, 
     pr_last_committer_email = last_commit.commit.author.email
     log.info "Last commit author email : ${pr_last_committer_email}"
 
-    return text
+    return pr_last_committer_email
 }
