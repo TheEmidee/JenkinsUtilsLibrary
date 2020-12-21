@@ -3,8 +3,7 @@
 import groovy.json.JsonSlurper
 
 def call( Script script, String github_token, String repository_owner, String repository_name, String pull_request_id ) {
-    def json_string = getGitHubPullRequestCommits( github_token, repository_owner, repository_name, pull_request_id )
-    def commits = script.readJSON text: json_string
+    def commits = getGitHubPullRequestCommits( script, github_token, repository_owner, repository_name, pull_request_id )
 
     def commits_count = commits.size()
     def last_commit = commits[ commits_count - 1 ]
