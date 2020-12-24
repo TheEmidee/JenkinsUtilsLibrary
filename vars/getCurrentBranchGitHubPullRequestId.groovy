@@ -1,9 +1,13 @@
 #!/usr/bin/groovy
 
 def call() {
-    def branch_name = getBranchName()
-    def pr_id = branch_name.substring( 3 )
-    // echo "PR ID : ${pr_id}"
+    String result = ""
 
-    return pr_id
+    def branch_name = getBranchName()
+    
+    if ( branch_name.startsWith( "PR-" ) ) {
+        result = branch_name.substring( 3 )
+    }
+
+    return result
 }
