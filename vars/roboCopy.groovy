@@ -5,7 +5,7 @@ def call( source, destination, arguments ) {
     def success = !(status < 0 || status > 3)
 
     if ( !success ) {
-        log.fatal( "ROBOCOPY failed" )
+        log.error( "ROBOCOPY failed" )
     }
 
     return success

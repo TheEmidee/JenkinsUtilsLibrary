@@ -8,8 +8,12 @@ def warning(message) {
     echo "WARNING: ${message}"
 }
 
-def fatal(message) {
+def error(message) {
     echo "ERROR: ${message}"
+}
+
+def fatal(message) {
+    echo "FATAL: ${message}"
     currentBuild.result = "ABORTED"
     error( message )
 }
