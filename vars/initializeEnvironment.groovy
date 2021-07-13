@@ -8,13 +8,8 @@ import org.emidee.jenkins.Environment
 def call( Script script, String project_name_override = null ) {
     log.info "InitializeEnvironment"
 
-    // Maybe not possible to call getBranchName from vars ?
     def branch_name = getBranchName()
-    //  script.env.BRANCH_NAME
-
-    // if ( branch_name == null ) {
-    //     branch_name = env.GIT_BRANCH
-    // }
+    log.info "BranchName : ${branch_name}"
 
     Environment.instance.BRANCH_NAME = branch_name
 
@@ -81,7 +76,7 @@ private def getBranchDeploymentEnvironment( BranchType branch_type ) {
     }
 }
 
-def getBuildConfiguration( DeploymentEnvironment deployment_environment ) {
+private def getBuildConfiguration( DeploymentEnvironment deployment_environment ) {
     switch ( deployment_environment ) {
         case DeploymentEnvironment.Shipping:
             return BuildConfiguration.Shipping
