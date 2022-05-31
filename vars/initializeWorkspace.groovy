@@ -10,7 +10,7 @@ def call( Script script ) {
 
     def global_workspace = new File( script.env.WORKSPACE ).parent
     def project_workspace_name = Environment.instance.PROJECT_NAME
-    project_workspace_name += ( deployment_environment as DeploymentEnvironment ) == DeploymentEnvironment.Shipping
+    project_workspace_name += ( Environment.instance.DEPLOYMENT_ENVIRONMENT as DeploymentEnvironment ) == DeploymentEnvironment.Shipping
         ? "_Master"
         : "_Develop"
 
