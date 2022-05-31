@@ -33,16 +33,6 @@ def call( Script script, String project_name_override = null ) {
 
     Environment.instance.BUILD_CONFIGURATION = build_configuration
     log.info "ClientConfiguration : ${Environment.instance.BUILD_CONFIGURATION}"
-
-    def global_workspace = new File( script.env.WORKSPACE ).parent
-    def project_workspace_name = Environment.instance.PROJECT_NAME
-    project_workspace_name += ( deployment_environment as DeploymentEnvironment ) == DeploymentEnvironment.Shipping
-        ? "_Master"
-        : "_Develop"
-
-    def workspace = new File( global_workspace, project_workspace_name )
-    log.info "Workspace : ${workspace}"
-    script.env.WORKSPACE = workspace
 }
 
 private def getProjectName(def script) {
