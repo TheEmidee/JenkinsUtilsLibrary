@@ -8,6 +8,8 @@ import org.emidee.jenkins.Environment
 def call( Script script, String project_name_override = null ) {
     log.info "InitializeEnvironment"
 
+    log.info env.NODE_NAME
+
     def branch_name = getBranchName()
     log.info "BranchName : ${branch_name}"
 
