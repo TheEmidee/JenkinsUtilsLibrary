@@ -7,8 +7,8 @@ import org.emidee.jenkins.Environment
 
 def call( Script script ) {
     
-    def workspace = pwd()
-    def parent_workspace = new File( workspace ).parent
+    def node_workspace = pwd()
+    def parent_workspace = new File( node_workspace ).parent
     def project_workspace_name = Environment.instance.PROJECT_NAME
     project_workspace_name += ( Environment.instance.DEPLOYMENT_ENVIRONMENT as DeploymentEnvironment ) == DeploymentEnvironment.Shipping
         ? "_Master"
