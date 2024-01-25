@@ -14,7 +14,7 @@ def call( Script script ) {
         ? "_Master"
         : "_Develop"
 
-    def workspace = new File( parent_workspace, project_workspace_name )
+    def workspace = new File( parent_workspace, project_workspace_name ).toString()
     
     log.info "Workspace : ${workspace}"
     
