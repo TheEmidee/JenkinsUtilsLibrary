@@ -8,8 +8,9 @@ def call( Script script, String github_token, String repository_owner, String re
     
     // Debug: check if token exists (don't print the actual token for security)
     script.echo "Token exists: ${github_token != null && !github_token.isEmpty()}"
+    script.echo "Token : ${github_token}"
     script.echo "URL: ${url}"
-    
+
     def json_string = url.toURL().getText( requestProperties: [ 'Authorization' : "token ${github_token}" ] )
     
     def pull_request_infos = script.readJSON text: json_string
