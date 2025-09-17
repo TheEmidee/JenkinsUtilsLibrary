@@ -4,6 +4,8 @@ def call( Script script, String github_token, String repository_owner, String re
     assert pull_request_id != null
     assert pull_request_id != ""
 
+    print github_token
+
     String url = "https://api.github.com/repos/${repository_owner}/${repository_name}/pulls/${pull_request_id}"
     
     def json_string = url.toURL().getText( requestProperties: [ 'Authorization' : "token ${github_token}" ] )
